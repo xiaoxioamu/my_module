@@ -138,6 +138,38 @@ def extract_consecutive_elements_within_range(
     
     return subarrays
 
+def filter_values(x_data, y_data, threshold=50):
+    """
+    功能说明:
+    该函数用于筛选出在给定阈值下，y_data数组中绝对值大于阈值的对应x_data值。
+
+    参数:
+    - x_data: numpy array, 表示自变量数据
+    - y_data: numpy array, 表示因变量数据
+    - threshold: float, 可选，表示筛选的阈值，默认为50
+
+    返回值:
+    - numpy array, 返回满足条件的x_data和y_data值的组合数组
+
+    示例:
+    ```python
+    import numpy as np
+    x_data = np.array([1, 2, 3, 4, 5])
+    y_data = np.array([10, 60, -70, 20, 30])
+    
+    filtered_values = filter_values(x_data, y_data, threshold=50)
+    print(filtered_values)  # 输出: [[2 60] [3 -70]]
+    ```
+    """
+
+    # 创建一个布尔掩码，筛选出绝对值大于阈值的y_data值
+    mask = np.abs(y_data) > threshold
+    
+    # 使用掩码从x_data和y_data中提取对应的值
+    filtered_values = np.column_stack((x_data[mask], y_data[mask]))
+    
+    return filtered_values
+
 # ---------------------
 # Example Usage
 # ---------------------
